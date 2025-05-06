@@ -4,6 +4,7 @@ import torch
 
 app= FastAPI()
 
+# initialize the model and tokenizer
 def init_opus():
     from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
     model_path = "Helsinki-NLP/opus-mt-zh-en"
@@ -19,6 +20,7 @@ def en_zh_translate(text, tokenizer, model):
     return finaltext[0]['translation_text']
 translate_tokenizer, translate_model = init_opus()
 
+# API definition
 @app.post("/translate")
 async def translate(request: Request):
     data = await request.json()
